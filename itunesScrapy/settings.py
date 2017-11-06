@@ -14,7 +14,7 @@ BOT_NAME = 'itunesScrapy'
 SPIDER_MODULES = ['itunesScrapy.spiders']
 NEWSPIDER_MODULE = 'itunesScrapy.spiders'
 FEED_FORMAT = "json"
-FEED_URI = "itunes_top_rated_song.json"
+FEED_URI = "crawled_data.json"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'itunesScrapy (+http://www.yourdomain.com)'
