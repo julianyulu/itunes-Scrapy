@@ -1,2 +1,4 @@
 venv_scrapy
+__pycache__
 *~
+*.pyc

@@ -2,8 +2,8 @@
 import scrapy
 
 
-class ItunesbotSpider(scrapy.Spider):
-    name = 'itunesbot'
+class ItunesSongSpider(scrapy.Spider):
+    name = 'itunes_song'
     #allowed_domains = ['https://www.apple.com/itunes/charts/songs/']
     start_urls = ['https://www.apple.com/itunes/charts/songs/']
     def parse(self, response):
