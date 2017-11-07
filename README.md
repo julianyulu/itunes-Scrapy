@@ -1,12 +1,13 @@
 # iTunes-Scrapy
-Auto scrape daily top rated songs, artists, albums, save scraped data in .json file
+Auto scrape daily top rated songs, artists, albums from itunes  
+data save scraped data in .json file.
 
-# Spiders  
+## Spiders  
 + itunes_song
 + itunes_artist
 + itunes_album
 
-# Structure  
+## Structure  
 ```
 scrapy.cfg
 requirements.txt
@@ -23,7 +24,7 @@ itunesScrapy/
 		itunes_album.py
 ```
 
-# How to run  
+## How to run  
 Clone this repository:  
 ```
 git clone git@github.com:SuperYuLu/itunes-Scrapy.git
@@ -54,8 +55,10 @@ Clean meta files and output json files:
 make clean
 ```
 
-# Output Files  
+## Output Files  
 + itunes_songs.json
 + itunes_artists.json
 + itunes_albums.json
+Check example output in folder *examples*  
+
 
