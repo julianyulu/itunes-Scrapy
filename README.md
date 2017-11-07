@@ -58,7 +58,7 @@ make clean
 ## Output Files  
 + itunes_songs.json
 + itunes_artists.json
-+ itunes_albums.json
++ itunes_albums.json  
 Check example output in folder *examples*  
 
 
