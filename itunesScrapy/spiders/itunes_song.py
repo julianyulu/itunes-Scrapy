@@ -6,6 +6,7 @@ class ItunesSongSpider(scrapy.Spider):
     name = 'itunes_song'
     #allowed_domains = ['https://www.apple.com/itunes/charts/songs/']
     start_urls = ['https://www.apple.com/itunes/charts/songs/']
+    songs_exist = []
     def parse(self, response):
         
         song = response.css('h3 a::text').extract()
@@ -20,9 +21,13 @@ class ItunesSongSpider(scrapy.Spider):
                 'rank': item[2],
                 'albumLink': item[3]
                 }
-            request = scrapy.Request(item[3], callback=self.parse_albumLink)
-            request.meta['scraped_info'] = scraped_info
-            yield request
+            if item[0] in self.songs_exist:
+                pass
+            else:
+                self.songs_exist.append(item[0])
+                request = scrapy.Request(item[3], callback=self.parse_albumLink)
+                request.meta['scraped_info'] = scraped_info
+                yield request
             
         
     def parse_albumLink(self, response):

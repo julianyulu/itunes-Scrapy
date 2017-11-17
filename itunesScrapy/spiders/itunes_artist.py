@@ -6,15 +6,19 @@ class ItunesArtistSpider(scrapy.Spider):
     name = 'itunes_artist'
     #allowed_domains = ['https://www.apple.com/itunes/charts/songs/']
     start_urls = ['https://www.apple.com/itunes/charts/songs/']
-
+    artists_exist = []
     def parse(self, response):
         artist = response.css('h4 a::text').extract()
         artist_link = response.css('h4 a::attr(href)').extract()
         
         for arti, arti_link in zip(artist, artist_link):
-            request = scrapy.Request(arti_link, callback=self.parse_artistLink)
-            request.meta['artist'] = arti
-            yield request
+            if arti in self.artists_exist:
+                pass
+            else:
+                self.artists_exist.append(arti)
+                request = scrapy.Request(arti_link, callback=self.parse_artistLink)
+                request.meta['artist'] = arti
+                yield request
     
     def parse_artistLink(self, response):
         artist = response.meta['artist']
