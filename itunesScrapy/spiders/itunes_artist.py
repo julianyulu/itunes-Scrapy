@@ -7,6 +7,7 @@ class ItunesArtistSpider(scrapy.Spider):
     #allowed_domains = ['https://www.apple.com/itunes/charts/songs/']
     start_urls = ['https://www.apple.com/itunes/charts/songs/']
     artists_exist = []
+    DOWNLOAD_DELAY = 0.1
     def parse(self, response):
         artist = response.css('h4 a::text').extract()
         artist_link = response.css('h4 a::attr(href)').extract()

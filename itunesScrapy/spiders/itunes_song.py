@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-
 class ItunesSongSpider(scrapy.Spider):
     name = 'itunes_song'
-    #allowed_domains = ['https://www.apple.com/itunes/charts/songs/']
     start_urls = ['https://www.apple.com/itunes/charts/songs/']
     songs_exist = []
-    
+    DOWNLOAD_DELAY = 1
     def parse(self, response):
         youtube_query_prefix = "https://www.youtube.com/results?search_query="
         
@@ -27,10 +25,11 @@ class ItunesSongSpider(scrapy.Spider):
                 pass
             else:
                 self.songs_exist.append(item[0])
-
-                request = scrapy.Request(youtube_query_prefix + item[0].replace(' ', '+'), callback = self.parse_youtubeQuery)
-                request.meta['scraped_info'] = scraped_info
-                yield request
+                # request = scrapy.Request(
+                #     youtube_query_prefix + item[0].replace(' ', '+'),
+                #     callback = self.parse_youtubeQuery)
+                # request.meta['scraped_info'] = scraped_info
+                # yield request
                 
                 request = scrapy.Request(item[3], callback=self.parse_albumLink)
                 request.meta['scraped_info'] = scraped_info
@@ -46,6 +45,7 @@ class ItunesSongSpider(scrapy.Spider):
                 youtube_search_link = response.css('h3 a::attr(href)').extract()[i]
                 scraped_info['youtube_link'] = youtube_link_prefix + youtube_search_link
                 yield scraped_info
+                break
             else:
                 pass
         
@@ -56,7 +56,6 @@ class ItunesSongSpider(scrapy.Spider):
         genre = response.css('.inline-list__item a::text').extract_first()
         duration = response.css('.is-active .table__row__duration::text').extract_first()
         release_time = response.css('.inline-list__item--bulleted time ::text').extract_first(default='N/A')
-        
         scraped_info['album'] = album
         scraped_info['duration'] = duration
         scraped_info['genre'] = genre
